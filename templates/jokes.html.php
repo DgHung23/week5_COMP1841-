@@ -9,7 +9,8 @@
                 <th scope="col">Image</th>
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
-                <th scope="col">Action</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,13 @@
                         <input type="hidden" name="id"
                             value="<?= htmlspecialchars($joke['id'], ENT_QUOTES, 'UTF-8') ?>">
                         <input class="delete-button" type="submit" value="Delete">
+                    </form>
+                </td>
+                <td>
+                    <form class="update-form" action="update_joke.php" method="post">
+                        <input type="hidden" name="id"
+                            value="<?= htmlspecialchars($joke['id'], ENT_QUOTES, 'UTF-8') ?>">
+                        <input class="update-button" type="submit" value="Update">
                     </form>
                 </td>
             </tr>
@@ -112,11 +120,13 @@
     font-size: 0.9rem;
 }
 
-.delete-form {
+.delete-form,
+.update-form {
     margin: 0;
 }
 
-.delete-form .delete-button {
+.delete-form .delete-button,
+.update-form .update-button {
     float: none;
     clear: none;
     width: auto;
@@ -131,7 +141,9 @@
 }
 
 .delete-button:hover,
-.delete-button:focus {
+.delete-button:focus,
+.update-button:hover,
+.update-button:focus {
     background: #b92534;
 }
 </style>

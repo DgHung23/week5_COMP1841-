@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['joketext'])) {
+if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['category_id'])) {
     try {
         include 'includes/DatabaseConnection.php';
 
@@ -19,10 +19,14 @@ if (isset($_POST['joketext'])) {
         $sql = 'INSERT INTO joke SET
         joketext = :joketext,
         jokedate = CURDATE(),
-        img_path = :joke_img';
+        img_path = :joke_img,
+        author_id = :author_id,
+        category_id = :category_id';
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':joketext', $_POST['joketext']);
         $stmt->bindValue(':joke_img', $imgPath);
+        $stmt->bindValue(':author_id', $_POST['author_id']);
+        $stmt->bindValue(':category_id', $_POST['category_id']);
         $stmt->execute();
         header('location: jokes.php');
         exit;
