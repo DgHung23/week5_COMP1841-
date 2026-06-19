@@ -2,7 +2,7 @@
 try {
     include 'includes/DatabaseConnection.php';
 
-    $sql = 'SELECT id,joketext,img_path FROM joke';
+    $sql = 'SELECT joke.id,joketext,author.name, email,img_path, category.name as joke_type FROM joke INNER JOIN author ON `author_id` = author.id INNER JOIN category ON `category_id` = category.id';
     $jokes = $pdo->query($sql);
     $title = 'Joke list';
 
