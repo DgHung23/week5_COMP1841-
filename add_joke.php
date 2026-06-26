@@ -38,6 +38,11 @@ if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['c
         $output = 'Upload error: ' . $e->getMessage();
     }
 } else {
+    include 'includes/DatabaseConnection.php';
+    $sql_a = 'SELECT * FROM author';
+    $authors = $pdo->query($sql_a);
+    $sql_c = 'SELECT * FROM category';
+    $categories = $pdo->query($sql_c);
     $title = 'Add a new joke';
     ob_start();
     include 'templates/add_joke.html.php';
