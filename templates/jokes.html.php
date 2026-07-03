@@ -1,4 +1,5 @@
 <h2>Jokes List</h2>
+<h3>Total Jokes has submitted to database: <?= $totalJokes ?></h3>
 
 <div class="jokes-table-wrapper">
     <table class="jokes-table">

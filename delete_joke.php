@@ -1,11 +1,8 @@
 <?php
 try{
     include 'includes/DatabaseConnection.php';
-
-    $sql = "DELETE FROM JOKE WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id", $_POST["id"]);
-    $stmt->execute();
+    include 'includes/DataBaseFunctions.php';
+    deleteJoke($pdo, $_POST['id']);
     header('location: jokes.php');
 } catch (PDOException $e) {
     $title = 'An error has occurred';

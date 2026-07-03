@@ -1,26 +1,15 @@
 <?php
 try {
     include 'includes/DatabaseConnection.php';
+    include 'includes/DataBaseFunctions.php';
 
     if (isset($_POST['joketext']) and isset($_POST['jokedate']) ) {
-        $sql = 'UPDATE joke SET
-            joketext = :joketext,
-            jokedate = :jokedate
-            WHERE id = :id';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':joketext', $_POST['joketext']);
-        $stmt->bindValue(':jokedate', $_POST['jokedate']);
-        $stmt->bindValue(':id', $_POST['id']);
-        $stmt->execute();
+        updateJoke($pdo, $_POST['id'], $_POST['joketext'], $_POST['jokedate']);
 
         header('location: jokes.php');
         exit;
     } else {
-        $sql = 'SELECT id, joketext, jokedate FROM joke WHERE id = :id';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':id', $_POST['id']);
-        $stmt->execute();
-        $joke = $stmt->fetch();
+        $joke = getJokes($pdo, $_POST['id']);
 
         $title = 'Update joke';
         ob_start();

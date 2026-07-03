@@ -1,7 +1,8 @@
 <?php
 if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['category_id'])) {
     try {
-        include 'includes/DatabaseConnection.php';
+        include 'includes\DatabaseConnection.php';
+        include 'includes\DataBaseFunctions.php';
 
         $imgPath = '';
         if (isset($_FILES['joke_img']) && $_FILES['joke_img']['error'] === UPLOAD_ERR_OK) {
@@ -16,18 +17,7 @@ if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['c
             $imgPath = 'img/' . $fileName;
         }
 
-        $sql = 'INSERT INTO joke SET
-        joketext = :joketext,
-        jokedate = CURDATE(),
-        img_path = :joke_img,
-        author_id = :author_id,
-        category_id = :category_id';
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':joketext', $_POST['joketext']);
-        $stmt->bindValue(':joke_img', $imgPath);
-        $stmt->bindValue(':author_id', $_POST['author_id']);
-        $stmt->bindValue(':category_id', $_POST['category_id']);
-        $stmt->execute();
+        insertJoke($pdo, $_POST['joketext'], $_POST['author_id'], $_POST['category_id'], $imgPath);
         header('location: jokes.php');
         exit;
     } catch (PDOException $e) {
@@ -38,11 +28,10 @@ if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['c
         $output = 'Upload error: ' . $e->getMessage();
     }
 } else {
-    include 'includes/DatabaseConnection.php';
-    $sql_a = 'SELECT * FROM author';
-    $authors = $pdo->query($sql_a);
-    $sql_c = 'SELECT * FROM category';
-    $categories = $pdo->query($sql_c);
+    include 'includes\DatabaseConnection.php';
+    include 'includes/DatabaseFunctions.php';
+    $authors = allAuthors($pdo);
+    $categories = allCategories($pdo);
     $title = 'Add a new joke';
     ob_start();
     include 'templates/add_joke.html.php';
