@@ -18,6 +18,7 @@
             <li><a href="jokes.php">Jokes List</a></li>
             <li><a href="add_joke.php">add a new joke</a></li>
             <li><a href="../index.php">Public Site</a></li>
+            <li><a href="login/Logout.php">Logout</a></li>
         </ul>
     </nav>
     <main>

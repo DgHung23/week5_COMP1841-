@@ -1,4 +1,5 @@
 <?php
+require 'login/Check.php';
 if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['category_id'])) {
     try {
         include '../includes/DatabaseConnection.php';

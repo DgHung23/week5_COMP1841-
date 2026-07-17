@@ -1,4 +1,5 @@
 <?php
+require 'login/Check.php';
 try {
     include '../includes/DatabaseConnection.php';
     include '../includes/DataBaseFunctions.php';
