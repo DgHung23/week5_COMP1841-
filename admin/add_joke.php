@@ -1,12 +1,12 @@
 <?php
 if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['category_id'])) {
     try {
-        include 'includes\DatabaseConnection.php';
-        include 'includes\DataBaseFunctions.php';
+        include '../includes/DatabaseConnection.php';
+        include '../includes/DataBaseFunctions.php';
 
         $imgPath = '';
         if (isset($_FILES['joke_img']) && $_FILES['joke_img']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . '/img/';
+            $uploadDir = __DIR__ . '/../img/';
             $fileName = $_FILES['joke_img']['name'];
             $targetPath = $uploadDir . $fileName;
 
@@ -28,13 +28,13 @@ if (isset($_POST['joketext']) and isset($_POST['author_id']) and isset($_POST['c
         $output = 'Upload error: ' . $e->getMessage();
     }
 } else {
-    include 'includes\DatabaseConnection.php';
-    include 'includes/DatabaseFunctions.php';
+    include '../includes/DatabaseConnection.php';
+    include '../includes/DataBaseFunctions.php';
     $authors = allAuthors($pdo);
     $categories = allCategories($pdo);
     $title = 'Add a new joke';
     ob_start();
-    include 'templates/add_joke.html.php';
+    include '../templates/add_joke.html.php';
     $output = ob_get_clean();
 }
-include 'templates/layout.html.php';
+include '../templates/admin_layout.html.php';

@@ -10,8 +10,8 @@
                 <th scope="col">Image</th>
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
-                <th scope="col">Delete</th>
-                <th scope="col">Update</th>
+                <!-- <th scope="col">Delete</th>
+                <th scope="col">Update</th> -->
             </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                 <td class="joke-text"><?= htmlspecialchars($joke['joketext'], ENT_QUOTES, 'UTF-8') ?></td>
                 <td>
                     <?php if (!empty($joke['img_path'])): ?>
-                    <img class="joke-image" src="../<?= htmlspecialchars($joke['img_path'], ENT_QUOTES, 'UTF-8') ?>"
+                    <img class="joke-image" src="<?= htmlspecialchars($joke['img_path'], ENT_QUOTES, 'UTF-8') ?>"
                         alt="Image for joke <?= htmlspecialchars($joke['id'], ENT_QUOTES, 'UTF-8') ?>">
                     <?php else: ?>
                     <span class="no-image">No image</span>
@@ -35,7 +35,7 @@
                 <td>
                     <?= htmlspecialchars($joke['joke_type'], ENT_QUOTES, 'UTF-8') ?>
                 </td>
-                <td>
+                <!-- <td>
                     <form class="delete-form" action="delete_joke.php" method="post">
                         <input type="hidden" name="id"
                             value="<?= htmlspecialchars($joke['id'], ENT_QUOTES, 'UTF-8') ?>">
@@ -48,7 +48,7 @@
                             value="<?= htmlspecialchars($joke['id'], ENT_QUOTES, 'UTF-8') ?>">
                         <input class="update-button" type="submit" value="Update">
                     </form>
-                </td>
+                </td> -->
             </tr>
             <?php endforeach; ?>
         </tbody>
